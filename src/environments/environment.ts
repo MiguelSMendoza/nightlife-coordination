@@ -4,5 +4,13 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyAHogp034Ke-_C0D5Gw6Rlm8z6i5TkpgDM',
+    authDomain: 'fcc-nightlife-coordinati-66274.firebaseapp.com',
+    databaseURL: 'https://fcc-nightlife-coordinati-66274.firebaseio.com',
+    projectId: 'fcc-nightlife-coordinati-66274',
+    storageBucket: '',
+    messagingSenderId: '916864616661'
+  }
 };
