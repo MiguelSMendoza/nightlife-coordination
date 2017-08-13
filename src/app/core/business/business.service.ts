@@ -72,12 +72,12 @@ export class BusinessService {
     if (!offset) {
       offset = 0;
     }
-    return this.http.get('http://localhost:4242/yelp/search/' + search + '/' + offset)
+    return this.http.get('https://smendoza.net/yelp/search/' + search + '/' + offset)
     .map(res => <Business[]>res.json());
   }
 
   getReviews(id: string) {
-    return this.http.get('http://localhost:4242/yelp/reviews/' + id + '/' + this.locale)
+    return this.http.get('https://smendoza.net/yelp/reviews/' + id + '/' + this.locale)
     .map(res => <Review[]>res.json());
   }
 
