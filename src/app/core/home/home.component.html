@@ -1,0 +1,47 @@
+<h1>Business</h1>
+<p class="text-muted lead">Select a poll to see the results and vote, or sign-in to make a new poll.</p>
+<form class="form-inline" (ngSubmit)="onSearch(searchInput.value)" #searchForm="ngForm">
+    <div class="form-group mx-sm-3">
+        <label for="search" class="sr-only">Search</label>
+        <input type="search" class="form-control" id="search" #searchInput placeholder="Search...">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+<hr/>
+<div class="list-group">
+    <div class="list-group-item list-group-item-action clearfix" *ngFor="let business of businesses;" [@listItem] (@listItem.done)="doNext()">
+        <div class="row" style="width: 100%; margin: 0 auto;">
+                <h4 class="col-10">{{business.name}} <span class="price">{{ business.price }}</span></h4>
+                <div class="col-2"> 
+                    <a [href]="cleanUrl('https://www.yelp.es/biz/'+business.id)" target="_blank">
+                        <div class="pull-right msm-star-ratings top-left rgt">
+                                <div class="msm-stars msm-star gray">
+                                    <div class="msm-fuel msm-star yellow" [style]="cleanStyle('width:'+ ((business.rating/5)*100) +'%;')"></div>
+                                </div>
+                                <div class="msm-legend">
+                                <span itemprop="ratingValue">{{ business.rating }}</span> / 5  - <span itemprop="ratingCount">{{ business.review_count }}</span> votos 
+                                </div>
+                            </div>
+                    </a>
+                </div>
+                
+        </div>
+       
+       <div class="row" style="width: 100%">
+        <div class="col-4 image text-center">
+            <img [src]="business.image_url ? business.image_url : '/assets/images/no-image.png' " [alt]="business.name+ ' Image'" 
+                class="mx-auto img-fluid d-block" />
+        </div>
+        <div class="col-8">
+            <blockquote *ngIf="business.reviews && business.reviews[0]">{{ business.reviews[0].text }}</blockquote>
+            <button class="btn btn-default">Yo voy</button>
+        </div>
+        <div class="right-bottom">
+                <a target="_blank" [href]="cleanUrl('http://maps.google.com/?q='+ business.location.display_address)"><address class="text-small" [innerHTML]="business.location.display_address.join('<br/>')"></address></a>
+                </div>
+        </div>
+    </div>
+    <div class="list-group-item">
+        <button class="btn btn-default" (click)="onMore()" type="button">More ...</button>
+    </div>
+</div>
