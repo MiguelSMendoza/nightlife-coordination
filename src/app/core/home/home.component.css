@@ -2,6 +2,13 @@
   max-height: 150px;
   overflow: hidden;
 }
+.btn-people .action { display: none; }
+.btn-people:hover .people { display: none; }
+.btn-people:hover .action { display: inline; }
+
+.input-group-addon {
+  cursor: pointer;
+}
 
 button {
   cursor: pointer;
@@ -95,6 +102,8 @@ button {
   position: absolute;
   bottom: 0;
   right: 0;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .price {
@@ -103,8 +112,6 @@ button {
 }
 
 address {
-  margin-bottom: 0.5rem;
-  margin-right: 0.5rem;
   font-size: small;
 }
 
@@ -112,7 +119,7 @@ blockquote {
   font-style: italic;
   font-size: small;
   font-family: "Times New Roman", Georgia, Serif;
-
+  margin-top: 1rem;
 }
 blockquote:before, blockquote:after {
   content: '"'

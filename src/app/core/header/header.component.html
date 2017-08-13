@@ -5,13 +5,13 @@
             <ng-template [ngIf]="isAuthenticated">
                 <div ngbDropdown class="d-inline-block my-2 my-sm-0">
                     <button class="btn btn-outline-success" id="dropdownBasic1" ngbDropdownToggle>{{username}}</button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownBasic1">
+                    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownBasic1">
                         <button (click)="onLogout()" class="dropdown-item" type="button">Logout</button>
                     </div>
                 </div>
             </ng-template>
     </div>
     </nav>
-    <h3 class="text-muted"><span class="hidden-sm-down">freeCodeCamp </span><i class="fa fa-free-code-camp"></i></h3>
+    <h3 class="text-muted"><span class="d-none d-sm-inline-block">freeCodeCamp&nbsp;</span><i class="fa fa-free-code-camp"></i></h3>
 </div>
  

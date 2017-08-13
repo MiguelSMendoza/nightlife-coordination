@@ -5,6 +5,10 @@ import { Subscription } from 'rxjs/Subscription';
 import { Business } from '../../model/business.model';
 import { BusinessService } from '../business/business.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { People } from '../../model/people.model';
+import { Review } from '../../model/review.model';
+import { AuthService } from "../../auth/auth.service";
+import { User } from "firebase/app";
 
 @Component({
   selector: 'app-home',
@@ -22,17 +26,23 @@ import { DomSanitizer } from '@angular/platform-browser';
   ]
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
+  subscriptions: Subscription[];
   totalBusinesses: Business[];
   businesses: Business[];
   position;
   next = 0;
   page = -1;
   search = '';
+  locale = 'es_ES';
+  isAuthenticated: boolean;
+  uid: string;
 
-  constructor(private businessService: BusinessService, private sanitizer: DomSanitizer) {
+  constructor(private businessService: BusinessService,
+    private sanitizer: DomSanitizer,
+    private authService: AuthService) {
     this.businesses = [];
     this.totalBusinesses = [];
+    this.subscriptions = [];
    }
 
    cleanStyle (data: string) {
@@ -44,6 +54,17 @@ export class HomeComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
+    const userSub = this.authService.user.subscribe(
+      (user: User) => {
+        this.isAuthenticated = (user) ? true : false;
+        if (this.isAuthenticated) {
+          this.uid = user.uid;
+        } else {
+          this.uid = null;
+        }
+      }
+    );
+    this.subscriptions.push(userSub);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -63,7 +84,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach(
+      (subscription) => subscription.unsubscribe()
+    );
   }
 
   doNext() {
@@ -74,22 +97,29 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onMore() {
     this.page += 1;
-    this.subscription = this.businessService.getBusiness(this.search, this.page).subscribe(
+    const sub = this.businessService.getBusiness(this.search, this.page).subscribe(
       businesses => {
         this.totalBusinesses = this.totalBusinesses.concat(businesses);
           this.totalBusinesses.forEach(
-            (business) => {
-              this.businessService.getReviews(business.id).subscribe(
-                (reviews) => {
+            (business: Business) => {
+              const subsc = this.businessService.getReviews(business.id).subscribe(
+                (reviews: Review[]) => {
                   business['reviews'] = reviews;
                 },
                 (err) => { }
+              );
+              this.subscriptions.push(subsc);
+              const subsr = this.businessService.getPeople(business.id).subscribe(
+                (people: People[]) => {
+                  business['going'] = people;
+                }
               );
             }
           );
           this.doNext();
       }
     );
+    this.subscriptions.push(sub);
   }
 
   onSearch(search) {
@@ -99,6 +129,25 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.page = -1;
     this.totalBusinesses = [];
     this.onMore();
+  }
+
+  userIsGoing(business: Business, uid: string) {
+    if (!business.going) {
+      return false;
+    }
+    const find = business.going.find(x => x.uid === uid);
+    return find !== undefined;
+  }
+
+  onGoing(business: Business) {
+    if (!this.uid) {
+      this.authService.login();
+    }
+    if (this.userIsGoing(business, this.uid)) {
+      this.businessService.notGoingTo(business.id);
+    } else {
+      this.businessService.goingTo(business.id);
+    }
   }
 
 }

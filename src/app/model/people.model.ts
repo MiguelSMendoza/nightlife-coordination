@@ -2,6 +2,7 @@ export class People {
 
     constructor(
         public name: string,
-        public image: number,
+        public uid: string,
+        public image: string,
     ) { }
 }
