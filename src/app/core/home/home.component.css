@@ -1,126 +1,137 @@
 .image {
-  max-height: 150px;
-  overflow: hidden;
+    max-height: 150px;
+    overflow: hidden;
 }
-.btn-people .action { display: none; }
-.btn-people:hover .people { display: none; }
-.btn-people:hover .action { display: inline; }
+
+.btn-people .action {
+    display: none;
+}
+
+.btn-people:hover .people {
+    display: none;
+}
+
+.btn-people:hover .action {
+    display: inline;
+}
 
 .input-group-addon {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 button {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .msm-star-ratings {
-  width: 120px;
-  min-height: 48px;
+    width: 120px;
+    min-height: 48px;
 }
 
 .msm-star-ratings.top-left,
 .msm-star-ratings.top-right {
-  margin-top: 3px;
+    margin-top: 3px;
 }
 
 .msm-star-ratings.lft {
-  float: left;
-  margin-right: 10px;
+    float: left;
+    margin-right: 10px;
 }
 
 .msm-star-ratings.rgt {
-  float: right;
-  margin-left: 10px;
+    float: right;
+    margin-left: 10px;
 }
 
 .msm-star-ratings .msm-stars {
-  height: 24px;
-  position: relative;
+    height: 24px;
+    position: relative;
 }
 
 .msm-star-ratings .msm-star {
-  background-position: 0px 0px;
+    background-position: 0px 0px;
 }
 
 .msm-star-ratings .msm-star.gray {
-  background-image: url(/assets/images/gray.png);
+    background-image: url(/nightlife/assets/images/gray.png);
 }
 
 .msm-star-ratings .msm-star.yellow {
-  background-image: url(/assets/images/yellow.png);
+    background-image: url(/nightlife/assets/images/yellow.png);
 }
 
 .msm-star-ratings .msm-star.orange {
-  background-image: url(/assets/images/orange.png);
+    background-image: url(/nightlife/assets/images/orange.png);
 }
 
 .msm-star-ratings .msm-stars .msm-fuel {
-  height: 24px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 0;
+    height: 24px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
 }
 
 .msm-star-ratings .msm-stars a {
-  width: 24px;
-  height: 24px;
-  float: left;
-  position: relative;
-  z-index: 1;
-  text-decoration: none;
-  border: 0;
+    width: 24px;
+    height: 24px;
+    float: left;
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+    border: 0;
 }
 
 .msm-star-ratings .msm-stars a:focus {
-  text-decoration: none;
-  border: 0;
-  outline: none;
+    text-decoration: none;
+    border: 0;
+    outline: none;
 }
 
 .msm-star-ratings .msm-legend {
-  font-size: 12px;
-  color: #999;
-  text-align: center;
-  line-height: 18px;
-  padding: 3px;
-  font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    line-height: 18px;
+    padding: 3px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .msm-star-ratings .msm-legend .msm-title {
-  display: none;
+    display: none;
 }
 
 .msm-star-ratings .msm-stars,
 .msm-star-ratings .msm-stars .msm-fuel,
 .msm-star-ratings .msm-stars a {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 .right-bottom {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-bottom: 0.5rem;
-  margin-right: 0.5rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 .price {
-  font-size: 70%;
-  color: goldenrod;
+    font-size: 70%;
+    color: goldenrod;
 }
 
 address {
-  font-size: small;
+    font-size: small;
 }
 
 blockquote {
-  font-style: italic;
-  font-size: small;
-  font-family: "Times New Roman", Georgia, Serif;
-  margin-top: 1rem;
+    font-style: italic;
+    font-size: small;
+    font-family: "Times New Roman", Georgia, Serif;
+    margin-top: 1rem;
 }
-blockquote:before, blockquote:after {
-  content: '"'
+
+blockquote:before,
+blockquote:after {
+    content: '"'
 }

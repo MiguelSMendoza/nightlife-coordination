@@ -70,15 +70,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         (position) => {
           this.position = position;
           this.search = this.position.coords.latitude + '/' + this.position.coords.longitude;
-          this.businesses = [];
-          this.totalBusinesses = [];
+          this.businesses.length = 0;
+          this.totalBusinesses.length = 0;
           this.onMore();
         }
       );
     } else {
       this.search = 'Albacete';
-      this.businesses = [];
-      this.totalBusinesses = [];
+      this.businesses.length = 0;
+      this.totalBusinesses.length = 0;
       this.onMore();
     }
   }
@@ -124,10 +124,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onSearch(search) {
     this.search = search;
-    this.businesses = [];
+    this.businesses.length = 0;
     this.next = 0;
     this.page = -1;
-    this.totalBusinesses = [];
+    this.totalBusinesses.length = 0;
     this.onMore();
   }
 

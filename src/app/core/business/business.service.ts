@@ -27,7 +27,7 @@ export class BusinessService {
         }
       }
     );
-    this.http.get('http://freegeoip.net/json/').subscribe(
+    this.http.get('https://freegeoip.net/json/').subscribe(
       (response) => {
         const data = JSON.parse(response.text());
         this.locale = navigator.language + '_' + data.country_code;

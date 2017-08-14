@@ -2,61 +2,60 @@
 <p class="text-muted lead">Search bars in your area and see who's going tonight.</p>
 <div class="row">
     <div class="col">
-<form (ngSubmit)="onSearch(searchInput.value)" #searchForm="ngForm">
-    <div class="input-group">
-        <input type="search" class="form-control" id="search" #searchInput placeholder="Search...">
-        <span class="input-group-addon btn btn-success" (click)="onSearch(searchInput.value)"><i class="fa fa-search"></i></span>
-    </div>
-</form>
+        <form (ngSubmit)="onSearch(searchInput.value)" #searchForm="ngForm">
+            <div class="input-group">
+                <input type="search" class="form-control" id="search" #searchInput placeholder="Search...">
+                <span class="input-group-addon btn btn-success" (click)="onSearch(searchInput.value)"><i class="fa fa-search"></i></span>
+            </div>
+        </form>
     </div>
 </div>
 <hr/>
 <div class="row" *ngIf="businesses.length==0">
     <div class="col text-center">
-        <img src="/assets/images/loading.gif" alt="Loading..." class="img-responsive center-block" />
+        <img src="assets/images/loading.gif" alt="Loading..." class="img-responsive center-block" />
     </div>
 </div>
 <div class="list-group">
     <div class="list-group-item list-group-item-action clearfix" *ngFor="let business of businesses;" [@listItem] (@listItem.done)="doNext()">
         <div class="row">
             <div class="col-8">
-                <h4 >{{business.name}} <span class="price">{{ business.price }}</span></h4>
+                <h4>{{business.name}} <span class="price">{{ business.price }}</span></h4>
             </div>
-                <div class="col-4 text-right"> 
-                    <button *ngIf="business.going" class="btn-people btn btn-outline-info">
+            <div class="col-4 text-right">
+                <button *ngIf="business.going" class="btn-people btn btn-outline-info">
                         <span class="people">{{ business.going.length }} going</span>
                         <span class="action" (click)="onGoing(business)">
                             <span *ngIf="!userIsGoing(business, uid)">I'm going</span>
                             <span *ngIf="userIsGoing(business, uid)">Not going</span>
                         </span>
                     </button>
-                </div>  
+            </div>
         </div>
-       
-       <div class="row" style="width: 100%">
-        <div class="col-4 image text-center">
-            <img [src]="business.image_url ? business.image_url : '/assets/images/no-image.png' " [alt]="business.name+ ' Image'" 
-                class="align-middle mx-auto img-fluid d-inline-block" />
-        </div>
-        <div class="col-8">
-            <blockquote *ngIf="business.reviews && business.reviews[0]">{{ business.reviews[0].text }}</blockquote>
-            <a [href]="cleanUrl('https://www.yelp.es/biz/'+business.id)" target="_blank">
-                <div class="pull-left msm-star-ratings top-left lft">
+
+        <div class="row" style="width: 100%">
+            <div class="col-4 image text-center">
+                <img [src]="business.image_url ? business.image_url : 'assets/images/no-image.png' " [alt]="business.name+ ' Image'" class="align-middle mx-auto img-fluid d-inline-block" />
+            </div>
+            <div class="col-8">
+                <blockquote *ngIf="business.reviews && business.reviews[0]">{{ business.reviews[0].text }}</blockquote>
+                <a [href]="cleanUrl('https://www.yelp.es/biz/'+business.id)" target="_blank">
+                    <div class="pull-left msm-star-ratings top-left lft">
                         <div class="msm-stars msm-star gray">
                             <div class="msm-fuel msm-star yellow" [style]="cleanStyle('width:'+ ((business.rating/5)*100) +'%;')"></div>
                         </div>
-                    <div class="msm-legend">
-                        <span itemprop="ratingValue">{{ business.rating }}</span> / 5  - <span itemprop="ratingCount">{{ business.review_count }}</span> votos
+                        <div class="msm-legend">
+                            <span itemprop="ratingValue">{{ business.rating }}</span> / 5 - <span itemprop="ratingCount">{{ business.review_count }}</span> votos
                         </div>
                     </div>
-            </a>
-        </div>
-        <div class="right-bottom">
-            <a target="_blank" [href]="cleanUrl('http://maps.google.com/?q='+ business.location.display_address)">
+                </a>
+            </div>
+            <div class="right-bottom">
+                <a target="_blank" [href]="cleanUrl('http://maps.google.com/?q='+ business.location.display_address)">
                 <address class="text-small d-none d-sm-block" [innerHTML]="business.location.display_address.join('<br/>')"></address>
                 <span class="d-sm-none">Map</span>
             </a>
-        </div>
+            </div>
         </div>
     </div>
     <div class="list-group-item text-center" *ngIf="businesses.length>0">
