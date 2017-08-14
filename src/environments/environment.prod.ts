@@ -7,5 +7,6 @@ export const environment = {
     projectId: 'fcc-nightlife-coordinati-66274',
     storageBucket: '',
     messagingSenderId: '916864616661'
-  }
+  },
+  ENDPOINT: 'https://smendoza.net'
 };

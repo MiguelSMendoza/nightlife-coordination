@@ -12,5 +12,6 @@ export const environment = {
     projectId: 'fcc-nightlife-coordinati-66274',
     storageBucket: '',
     messagingSenderId: '916864616661'
-  }
+  },
+  ENDPOINT: 'http://192.168.1.43:4242'
 };

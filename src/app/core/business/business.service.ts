@@ -8,6 +8,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { AuthService } from '../../auth/auth.service';
 import { People } from '../../model/people.model';
 import { User } from 'firebase';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class BusinessService {
@@ -30,7 +31,7 @@ export class BusinessService {
     this.http.get('https://freegeoip.net/json/').subscribe(
       (response) => {
         const data = JSON.parse(response.text());
-        this.locale = navigator.language + '_' + data.country_code;
+        this.locale = navigator.language.slice(0,2) + '_' + data.country_code;
       }
     );
   }
@@ -72,12 +73,12 @@ export class BusinessService {
     if (!offset) {
       offset = 0;
     }
-    return this.http.get('https://smendoza.net/yelp/search/' + search + '/' + offset)
+    return this.http.get(environment.ENDPOINT + '/yelp/search/' + search + '/' + offset)
     .map(res => <Business[]>res.json());
   }
 
   getReviews(id: string) {
-    return this.http.get('https://smendoza.net/yelp/reviews/' + id + '/' + this.locale)
+    return this.http.get(environment.ENDPOINT + '/yelp/reviews/' + id + '/' + this.locale)
     .map(res => <Review[]>res.json());
   }
 

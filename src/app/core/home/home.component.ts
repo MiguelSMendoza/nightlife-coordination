@@ -7,8 +7,8 @@ import { BusinessService } from '../business/business.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { People } from '../../model/people.model';
 import { Review } from '../../model/review.model';
-import { AuthService } from "../../auth/auth.service";
-import { User } from "firebase/app";
+import { AuthService } from '../../auth/auth.service';
+import { User } from 'firebase/app';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   search = '';
   locale = 'es_ES';
   isAuthenticated: boolean;
+  loading: true;
   uid: string;
 
   constructor(private businessService: BusinessService,
@@ -43,14 +44,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.businesses = [];
     this.totalBusinesses = [];
     this.subscriptions = [];
-   }
-
-   cleanStyle (data: string) {
-    return this.sanitizer.bypassSecurityTrustStyle(data);
-   }
-
-   cleanUrl (data: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(data);
    }
 
   ngOnInit() {
@@ -70,15 +63,18 @@ export class HomeComponent implements OnInit, OnDestroy {
         (position) => {
           this.position = position;
           this.search = this.position.coords.latitude + '/' + this.position.coords.longitude;
-          this.businesses.length = 0;
-          this.totalBusinesses.length = 0;
+          this.businesses = [];
+          this.totalBusinesses = [];
           this.onMore();
+        },
+        (failure) => {
+          this.onSearch('Albacete');
         }
       );
     } else {
       this.search = 'Albacete';
-      this.businesses.length = 0;
-      this.totalBusinesses.length = 0;
+      this.businesses = [];
+      this.totalBusinesses = [];
       this.onMore();
     }
   }
@@ -104,16 +100,19 @@ export class HomeComponent implements OnInit, OnDestroy {
             (business: Business) => {
               const subsc = this.businessService.getReviews(business.id).subscribe(
                 (reviews: Review[]) => {
-                  business['reviews'] = reviews;
+                  business.reviews = reviews;
                 },
-                (err) => { }
+                (err) => {
+                  console.log(err);
+                }
               );
               this.subscriptions.push(subsc);
               const subsr = this.businessService.getPeople(business.id).subscribe(
                 (people: People[]) => {
-                  business['going'] = people;
+                  business.going = people;
                 }
               );
+              this.subscriptions.push(subsr);
             }
           );
           this.doNext();
@@ -124,10 +123,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onSearch(search) {
     this.search = search;
-    this.businesses.length = 0;
+    this.businesses = [];
     this.next = 0;
     this.page = -1;
-    this.totalBusinesses.length = 0;
+    this.totalBusinesses = [];
     this.onMore();
   }
 
