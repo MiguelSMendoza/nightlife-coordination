@@ -9,7 +9,7 @@
         "assets": [
             "assets",
             "favicon.ico",
-            "business.json"
+            "favicon"
         ],
         "index": "index.html",
         "main": "main.ts",
