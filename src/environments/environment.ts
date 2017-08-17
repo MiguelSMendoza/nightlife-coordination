@@ -6,12 +6,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyAHogp034Ke-_C0D5Gw6Rlm8z6i5TkpgDM',
-    authDomain: 'fcc-nightlife-coordinati-66274.firebaseapp.com',
-    databaseURL: 'https://fcc-nightlife-coordinati-66274.firebaseio.com',
-    projectId: 'fcc-nightlife-coordinati-66274',
-    storageBucket: '',
-    messagingSenderId: '916864616661'
+    apiKey: 'AIzaSyC3ADNgzymRoeMVhl326atcy5mQaFo6MyI',
+    authDomain: 'fcc-smendoza.firebaseapp.com',
+    databaseURL: 'https://fcc-smendoza.firebaseio.com',
+    projectId: 'fcc-smendoza',
+    storageBucket: 'fcc-smendoza.appspot.com',
+    messagingSenderId: '82796816871'
   },
   ENDPOINT: 'http://192.168.1.43:4242'
 };
