@@ -1,9 +1,20 @@
-language: node_js
+anguage: node_js
 node_js:
- - "node"
+  - "6.9"
+branches:
+  only:
+    - master
+before_script:
+  - npm install -g @angular/cli
+script:
+  - ng build --prod
 after_success:
  - git config --global user.name "Miguel S. Mendoza"
  - git config --global user.email "miguel@smendoza.net"
  - git remote rm origin
  - git remote add origin https://github.com/MiguelSMendoza/nightlife-coordination.git
  - npm run deploy
+notifications:
+  email:
+    on_failure: change
+    on_success: change
