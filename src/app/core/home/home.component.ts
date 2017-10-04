@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireList } from 'angularfire2/database';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Subscription } from 'rxjs/Subscription';
 import { Business } from '../../model/business.model';
@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 }
               );
               this.subscriptions.push(subsc);
-              const subsr = this.businessService.getPeople(business.id).subscribe(
+              const subsr = this.businessService.getPeople(business.id).valueChanges().subscribe(
                 (people: People[]) => {
                   business.going = people;
                 }

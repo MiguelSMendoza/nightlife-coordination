@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { Business } from '../../model/business.model';
 import { Review } from '../../model/review.model';
 import { Subscription } from 'rxjs/Subscription';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AuthService } from '../../auth/auth.service';
 import { People } from '../../model/people.model';
 import { User } from 'firebase';
@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment';
 export class BusinessService {
   locale = 'es_ES';
   subs: Subscription;
-  people: FirebaseListObservable<People[]>;
+  people: AngularFireList<People>;
   userPeople: People;
 
   constructor(private http: Http, private db: AngularFireDatabase, private authService: AuthService) {
@@ -44,12 +44,9 @@ export class BusinessService {
   }
 
   getPeople(id: string) {
-    return this.db.list('/people/' + id, {
-      query: {
-        orderByChild: 'timestamp',
-        startAt: this.getTimestamp()
-      }
-    });
+    return this.db.list('/people/' + id, 
+      ref => ref.orderByChild('timestamp').startAt(this.getTimestamp())
+    );
   }
 
   goingTo(id: string) {

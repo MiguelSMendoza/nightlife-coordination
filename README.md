@@ -1,6 +1,10 @@
+[![Build Status](https://travis-ci.org/MiguelSMendoza/nightlife-coordination.svg?branch=master)](https://travis-ci.org/MiguelSMendoza/nightlife-coordination)
+
 # NightlifeCoordination
 
 Full Stack JavaScript App created following instructions on [freeCodeCamp](https://www.freecodecamp.org/challenges/build-a-nightlife-coordination-app).
+
+[Live Demo](https://MiguelSMendoza.github.io/nightlife-coordination)
 
 ## User Stories
 * As an unauthenticated user, I can view all bars in my area.
