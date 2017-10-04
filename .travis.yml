@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+ - "node"
+after_success:
+ - git config --global user.name "Miguel S. Mendoza"
+ - git config --global user.email "miguel@smendoza.net"
+ - git remote rm origin
+ - git remote add origin https://github.com/MiguelSMendoza/nightlife-coordination.git
+ - npm run deploy
