@@ -53,15 +53,15 @@ button {
 }
 
 .msm-star-ratings .msm-star.gray {
-    background-image: url(/nightlife/assets/images/gray.png);
+    background-image: url(/assets/images/gray.png);
 }
 
 .msm-star-ratings .msm-star.yellow {
-    background-image: url(/nightlife/assets/images/yellow.png);
+    background-image: url(/assets/images/yellow.png);
 }
 
 .msm-star-ratings .msm-star.orange {
-    background-image: url(/nightlife/assets/images/orange.png);
+    background-image: url(/assets/images/orange.png);
 }
 
 .msm-star-ratings .msm-stars .msm-fuel {
